@@ -9,247 +9,85 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
-    
-
+    <link rel="stylesheet" href="style.css">
     <style>
                 body {
-                        font-family: 'Arial', sans-serif;
-                        background-color: white;
-                        padding: 10px;
-                        color: #333;
-                        position: relative; /* Position pour permettre le filigrane */
-                    }
+                        font-family: 'Inter', sans-serif;
+                        background-color: #f8fafc;
+                        padding: 0;
+                        margin: 0;
+                        color: #1a1a1a;
+                }
 
-                    .container {
+                /* Container for the bulletin itself (printable) */
+                .container {
                         max-width: 900px;
-                        margin: 0 auto;
-                        background-color: #61e2f7;
-                        box-shadow: 0 0 5px rgba(0, 0, 0, 0.1); /* Réduit l'ombre */
-                        position: relative; /* Position pour assurer que le contenu reste au-dessus */
-                        z-index: 2; /* Le contenu doit être au-dessus du filigrane */
-                    }
+                        margin: 20px auto;
+                        background-color: #ffffff;
+                        padding: 30px;
+                        box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+                        position: relative;
+                        z-index: 2;
+                        border-radius: 8px;
+                }
 
-                    .container::before {
+                @media print {
+                    body { background-color: white; padding: 0; }
+                    .container { margin: 0; box-shadow: none; border-radius: 0; width: 100%; max-width: 100%; }
+                    .no-print { display: none !important; }
+                }
+
+                .container::before {
                         content: "";
                         position: absolute;
                         top: 0;
                         left: 0;
                         width: 100%;
                         height: 100%;
-                        background-color: #61e2f7;
-                        background-image: url('CS1.png'); /* Remplacez par le chemin vers votre image de filigrane */
+                        background-image: url('CS1.png');
                         background-repeat: no-repeat;
-
                         background-position: center;
-                        background-size: 99%; /* Ajustez la taille du filigrane */
-                        opacity: 0.15; /* Ajustez la transparence du filigrane */
-                        z-index: 1; /* Place le filigrane derrière le contenu */
-                        pointer-events: none; /* Empêche toute interaction avec le filigrane */
-                    }
-
-
-                h1, h2, h3 {
-                    text-align: center;
-                    margin-bottom: 8px; /* Réduit la marge */
-                }
-                h6 {
-                    text-align: center;
-                    margin-bottom: 4px; /* Réduit la marge */
+                        background-size: 70%;
+                        opacity: 0.05;
+                        z-index: -1;
+                        pointer-events: none;
                 }
 
-
-                .header, .footer {
-                    display: flex;
-                    justify-content: space-between;
-                    align-items: center;
-                    margin-bottom: 12px; /* Réduit la marge */
-                }
-
-                .header-left {
-                    text-align: left;
-
-                }
-
-                .header-right {
-                    text-align: right;
-                    flex: 3;
-                    padding-right: 40px;
-                    margin-top:50px;
-                }
-
-                .header img {
-                    max-width: 130px; /* Taille de l'image */
-                    display: block;
-                    margin-left: 90px;
-                }
-
+                h1, h2, h3 { text-align: center; margin-bottom: 8px; color: var(--primary-color); }
+                
                 table {
                     width: 100%;
                     border-collapse: collapse;
-                    margin-bottom: 10px; /* Espace entre les tables */
-                    font-size: 11px; /* Taille de la police */
-                    color: black; /* Couleur du texte */
-                }
-
-                table, th, td {
-                    border: 1px solid #000; /* Bordures noires */
-                }
-
-                th, td {
-                    padding: 5px; /* Espacement plus uniforme */
-                    text-align: center; /* Texte centré */
-                }
-
-                th {
-                    background-color: #333; /* Fond noir */
-                    color: black; /* Texte blanc */
-                    font-weight: bold; /* Texte en gras */
-                }
-
-                td {
-                    background-color: #f9f9f9; /* Légère couleur de fond pour les cellules */
-                }
-
-                .table-title {
-                    margin-top: 16px; /* Ajoute un espace avant le titre */
-                    margin-bottom: 10px; /* Ajoute un espace après le titre */
-                    font-size: 16px; /* Taille de la police plus grande */
-                    font-weight: bold; /* Texte en gras */
-                    text-align: left; /* Alignement à gauche */
-                    color: #000; /* Texte noir */
-                }
-
-
-                .observations {
-                    margin-bottom: 5px; /* Réduit la marge */
-                }
-
-                .observations div {
-                    margin-bottom: 2px; /* Réduit la marge */
+                    margin-bottom: 10px;
                     font-size: 11px;
+                    color: black;
                 }
 
-                .signature {
-                    text-align: right;
-                    margin-top: 4px; /* Réduit la marge */
-                }
+                table, th, td { border: 1px solid #000; }
+                th, td { padding: 5px; text-align: center; }
+                th { background-color: #f3f4f6; color: #1a1a1a; font-weight: bold; }
+                td { background-color: #fff; }
 
-                .signature div {
-                    margin-bottom: 4px; /* Réduit la marge */
-                    font-size: 11px;
-                }
-
-                .text-left {
-                    text-align: left;
-                }
-
-                .checkboxes {
-                    display: flex;
-                    justify-content: center;
-                    margin-bottom: 15px; /* Réduit la marge */
-                }
-
-                .checkboxes div {
-                    margin-right: 10px; /* Réduit la marge */
-                }
-
-                /* Styles pour les tableaux regroupés */
-                thead th {
-                    background-color: white;
-                    font-weight: bold;
-                }
-
-                /* Réduire la taille du texte pour les éléments strong */
-                strong {
-                    font-size: 10px; /* Réduisez cette valeur en fonction de la taille souhaitée */
-                    font-weight: bold; /* Assurez-vous que le texte reste en gras */
-                }
-
-
-                /* Réduire la taille du texte pour les éléments em et span */
-                em, span {
-                    font-size: 11px; /* Réduisez cette valeur en fonction de la taille souhaitée */
-                }
-
-
-        /* Cache les éléments avec la classe .no-print dans le PDF ou l'impression */
-        /* Cache les éléments lors de l'impression */
-        /* Cache les boutons lors de l'impression */
         @media print {
-            .no-print {
-                display: none !important;
-            }
-            #homeButton,
-            #backButton,
-            #downloadButton {
-                display: none !important; /* S'assure que tous sont cachés */
-            }
+            .no-print { display: none !important; }
         }
+    </style>
+</head>
 
-        /* Styles généraux */
-        .button {
-            display: inline-flex;
-            align-items: center;
-            padding: 10px 20px;
-            font-size: 16px;
-            font-family: Arial, sans-serif;
-            color: #fff;
-            text-decoration: none;
-            background-color: #007bff;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            margin-right: 10px;
-            transition: background-color 0.3s, transform 0.2s;
-        }
-
-        .button i {
-            margin-right: 8px;
-        }
-
-        .button:hover {
-            background-color: #0056b3;
-            transform: scale(1.05);
-        }
-
-        /* Styles spécifiques */
-        #homeButton {
-            background-color: #28a745;
-        }
-        #homeButton:hover {
-            background-color: #1e7e34;
-        }
-
-        #backButton {
-            background-color: #ffc107;
-            color: #212529;
-        }
-        #backButton:hover {
-            background-color: #e0a800;
-        }
-
-        #downloadButton {
-            background-color: #17a2b8;
-            position: relative; /* Évite les déplacements */
-        }
-        #downloadButton:hover {
-            background-color: #138496;
-        }
-
-
-</style>
-
-<!-- Boutons -->
-<!-- Boutons avec la classe no-print pour les cacher lors de l'impression -->
-<a id="homeButton" href="index.html" class="button no-print">
-    <i class="fas fa-home"></i> Home
-</a>
-<a id="backButton" href="6-5ème.html" class="button no-print">
-    <i class="fas fa-arrow-left"></i> Retour
-</a>
-<button id="downloadButton" class="button no-print" onclick="downloadPDF()">
-    <i class="fas fa-download"></i> Télécharger PDF
-</button>
+<body>
+    <header class="premium-header no-print">
+        <div style="display: flex; gap: 15px;">
+            <a href="index.html" class="nav-link home">
+                <i class="fas fa-home"></i> Accueil
+            </a>
+            <a href="6-5ème.html" class="nav-link back">
+                <i class="fas fa-arrow-left"></i> Retour
+            </a>
+        </div>
+        <button onclick="downloadPDF()" class="nav-link" style="background: var(--primary-color); color: white; border: none; cursor: pointer; padding: 0.8rem 1.5rem; border-radius: 12px; font-weight: 600; display: flex; align-items: center; gap: 10px; transition: all 0.3s ease;">
+            <i class="fas fa-file-pdf"></i> Télécharger PDF
+        </button>
+    </header>
 
     
 </head>
@@ -412,7 +250,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
      <!-- Bouton de téléchargement -->
     
-      <div class="container" style:"background-color:#61e2f7;">
+      <div class="container" style="background-color: #ffffff;">
         <div class="header">
         <div class="header-left">
         <strong>&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; MINISTÈRE DES ENSEIGNEMENTS <br>&nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PRIMAIRES SECONDAIRES,TECHNIQUES <br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ET DE L'ARTISANAT</strong><br>

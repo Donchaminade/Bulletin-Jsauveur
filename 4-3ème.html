@@ -1,254 +1,187 @@
 <!DOCTYPE html>
 <html lang="fr">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bulletin de Notes - Formulaire de Saisie</title>
-    <link rel="stylesheet" href="bootstrap.min.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">    <style>
-        
-header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            background-color: rgba(0, 0, 0, 0.7);
-            padding: 10px 20px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-            z-index: 1000;
-            display: flex;
-            justify-content: space-between;
-        }
-
-        /* Style des boutons de l'en-tête */
-        header .button {
-            display: inline-flex;
-            align-items: center;
-            padding: 10px 15px;
-            font-size: 16px;
-            font-family: Arial, sans-serif;
-            color: #fff;
-            text-decoration: none;
-            background-color: #007bff;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s, transform 0.2s;
-        }
-
-        header .button i {
-            margin-right: 8px;
-        }
-
-        header .button:hover {
-            transform: scale(1.05);
-        }
-
-        #homeButton {
-            background-color: #28a745;
-        }
-        #homeButton:hover {
-            background-color: #1e7e34;
-        }
-
-        #backButton {
-            background-color: #ffc107;
-            color: #212529;
-        }
-        #backButton:hover {
-            background-color: #e0a800;
-        }
-        /* Ajoutez ici vos styles personnalisés si nécessaire */
-    </style>
+    <title>Saisie des Notes | 4ème - 3ème</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
-
 <body>
-    <header>
-        <a id="homeButton" href="index.html" class="button no-print">
-            <i class="fas fa-home"></i> Home
+    <header class="premium-header">
+        <a id="homeButton" href="index.html" class="nav-link home no-print">
+            <i class="fas fa-home"></i> Accueil
         </a>
-        <a id="backButton" href="classe.html" class="button no-print">
+        <a id="backButton" href="classe.html" class="nav-link back no-print">
             <i class="fas fa-arrow-left"></i> Retour
         </a>
     </header>
-    <br><br>
-    <div class="container">
-        <h1 class="mt-4">Bulletin de Notes - Saisie des Notes</h1>
-        <form action="bulletin4-3.php" method="POST">
-            <!-- Informations générales -->
-            <div class="row my-4">
-                <div class="col-md-6">
-                    <div class="mb-3">
-                        <label for="anneeScolaire" class="form-label"><strong>Année Scolaire :</strong></label>
-                        <input type="text" id="anneeScolaire" name="anneeScolaire" class="form-control" placeholder="Ex: 2023-2024" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="trimestre" class="form-label"><strong>Trimestre :</strong></label>
-                        <input type="text" id="trimestre" name="trimestre" class="form-control" placeholder="Ex: 1 " required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="classe" class="form-label"><strong>Classe :</strong></label>
-                        <input type="text" id="classe" name="classe" class="form-control" placeholder="Ex: 3ème" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="effectif" class="form-label"><strong>Effectif :</strong></label>
-                        <input type="number" id="effectif" name="effectif" class="form-control" placeholder="Ex: 14" required>
+
+    <main class="main-container">
+        <div class="form-container animate-fade-in">
+            <div class="glass-card" style="padding: 2rem; margin-bottom: 2rem; text-align: left;">
+                <h1 style="font-size: 2rem; margin-bottom: 1rem;">Bulletin de Notes - Saisie (4ème / 3ème)</h1>
+                <p style="margin-bottom: 0;">Veuillez remplir les informations de l'élève et les notes par matière ci-dessous.</p>
+            </div>
+
+            <form action="bulletin4-3.php" method="POST">
+                <!-- Informations générales -->
+                <div class="card-section">
+                    <h2 style="font-size: 1.2rem; color: var(--primary-color); margin-bottom: 1.5rem; border-bottom: 2px solid #f3f4f6; padding-bottom: 0.5rem;">
+                        <i class="fas fa-info-circle"></i> Informations Générales
+                    </h2>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
+                        <div>
+                            <label for="anneeScolaire" class="form-label">Année Scolaire</label>
+                            <input type="text" id="anneeScolaire" name="anneeScolaire" class="form-control-premium" placeholder="Ex: 2023-2024" required>
+                        </div>
+                        <div>
+                            <label for="trimestre" class="form-label">Trimestre</label>
+                            <input type="text" id="trimestre" name="trimestre" class="form-control-premium" placeholder="Ex: 1" required>
+                        </div>
+                        <div>
+                            <label for="classe" class="form-label">Classe</label>
+                            <input type="text" id="classe" name="classe" class="form-control-premium" placeholder="Ex: 3ème" required>
+                        </div>
+                        <div>
+                            <label for="effectif" class="form-label">Effectif</label>
+                            <input type="number" id="effectif" name="effectif" class="form-control-premium" placeholder="Ex: 14" required>
+                        </div>
+                        <div>
+                            <label for="nomEleve" class="form-label">Nom de l'élève</label>
+                            <input type="text" id="nomEleve" name="nomEleve" class="form-control-premium" placeholder="Nom Complet" required>
+                        </div>
+                        <div style="display: flex; align-items: flex-end; gap: 20px; padding-bottom: 10px;">
+                            <label class="form-label" style="margin-bottom: 0;">Sexe :</label>
+                            <label style="cursor: pointer; color: var(--text-color-dark);"><input type="radio" name="gender" value="Garçon" checked> M</label>
+                            <label style="cursor: pointer; color: var(--text-color-dark);"><input type="radio" name="gender" value="Fille"> F</label>
+                        </div>
                     </div>
                 </div>
-                <div class="col-md-6">
-                    <div class="mb-3">
-                        <label for="nomEleve" class="form-label"><strong>Nom de l'élève :</strong></label>
-                        <input type="text" id="nomEleve" name="nomEleve" class="form-control" placeholder="Ex: ANDJOLU Donald Chaminade" required>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="gender" id="garcon" value="Garçon" checked>
-                        <label class="form-check-label" for="garcon"><strong>Garçon</strong></label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="gender" id="fille" value="Fille">
-                        <label class="form-check-label" for="fille"><strong>Fille</strong></label>
+
+                <!-- Saisie des Notes -->
+                <div class="card-section">
+                    <h2 style="font-size: 1.2rem; color: var(--primary-color); margin-bottom: 1.5rem; border-bottom: 2px solid #f3f4f6; padding-bottom: 0.5rem;">
+                        <i class="fas fa-list-ol"></i> Saisie des Notes
+                    </h2>
+                    <div style="overflow-x: auto;">
+                        <table class="table-premium">
+                            <thead>
+                                <tr>
+                                    <th style="width: 22%;">Matière</th>
+                                    <th style="width: 14%;">Note Classe 1</th>
+                                    <th style="width: 14%;">Note Classe 2</th>
+                                    <th style="width: 14%;">Note Compét.</th>
+                                    <th style="width: 28%;">Professeur</th>
+                                    <th style="width: 8%;">Coef.</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Comp. Française</strong></td>
+                                    <td><input type="text" class="form-control-premium" name="noteClasseFrancaise1" required></td>
+                                    <td><input type="text" class="form-control-premium" name="noteClasseFrancaise2" required></td>
+                                    <td><input type="text" class="form-control-premium" name="noteCompFrancaise" required></td>
+                                    <td><input type="text" class="form-control-premium" name="profCompFrancaise" required></td>
+                                    <td style="text-align: center;">3</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Anglais</strong></td>
+                                    <td><input type="text" class="form-control-premium" name="noteClasseAnglais1" required></td>
+                                    <td><input type="text" class="form-control-premium" name="noteClasseAnglais2" required></td>
+                                    <td><input type="text" class="form-control-premium" name="noteCompAnglais" required></td>
+                                    <td><input type="text" class="form-control-premium" name="profCompAnglais" required></td>
+                                    <td style="text-align: center;">2</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Histoire-Géo</strong></td>
+                                    <td><input type="text" class="form-control-premium" name="noteClasseHistoireGeo1" required></td>
+                                    <td><input type="text" class="form-control-premium" name="noteClasseHistoireGeo2" required></td>
+                                    <td><input type="text" class="form-control-premium" name="noteCompHistoireGeo" required></td>
+                                    <td><input type="text" class="form-control-premium" name="profCompHistoireGeo" required></td>
+                                    <td style="text-align: center;">2</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>ECM</strong></td>
+                                    <td><input type="text" class="form-control-premium" name="noteClasseECM1" required></td>
+                                    <td><input type="text" class="form-control-premium" name="noteClasseECM2" required></td>
+                                    <td><input type="text" class="form-control-premium" name="noteCompECM" required></td>
+                                    <td><input type="text" class="form-control-premium" name="profCompECM" required></td>
+                                    <td style="text-align: center;">2</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Mathématiques</strong></td>
+                                    <td><input type="text" class="form-control-premium" name="noteClasseMath1" required></td>
+                                    <td><input type="text" class="form-control-premium" name="noteClasseMath2" required></td>
+                                    <td><input type="text" class="form-control-premium" name="noteCompMath" required></td>
+                                    <td><input type="text" class="form-control-premium" name="profCompMath" required></td>
+                                    <td style="text-align: center;">3</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>SVT</strong></td>
+                                    <td><input type="text" class="form-control-premium" name="noteClasseSVT1" required></td>
+                                    <td><input type="text" class="form-control-premium" name="noteClasseSVT2" required></td>
+                                    <td><input type="text" class="form-control-premium" name="noteCompSVT" required></td>
+                                    <td><input type="text" class="form-control-premium" name="profCompSVT" required></td>
+                                    <td style="text-align: center;">2</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>PCT / P-C</strong></td>
+                                    <td><input type="text" class="form-control-premium" name="noteClassePhysique1" required></td>
+                                    <td><input type="text" class="form-control-premium" name="noteClassePhysique2" required></td>
+                                    <td><input type="text" class="form-control-premium" name="noteCompPhysique" required></td>
+                                    <td><input type="text" class="form-control-premium" name="profCompPhysique" required></td>
+                                    <td style="text-align: center;">3</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>EPS</strong></td>
+                                    <td><input type="text" class="form-control-premium" name="noteClasseEPS1"></td>
+                                    <td><input type="text" class="form-control-premium" name="noteClasseEPS2"></td>
+                                    <td><input type="text" class="form-control-premium" name="noteCompEPS"></td>
+                                    <td><input type="text" class="form-control-premium" name="profCompEPS"></td>
+                                    <td><input type="number" class="form-control-premium" name="coefE" placeholder="Coef"></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Musique/Dessin...</strong></td>
+                                    <td><input type="text" class="form-control-premium" name="noteClasseFac1"></td>
+                                    <td><input type="text" class="form-control-premium" name="noteClasseFac2"></td>
+                                    <td><input type="text" class="form-control-premium" name="noteCompFac"></td>
+                                    <td><input type="text" class="form-control-premium" name="profCompFac"></td>
+                                    <td><input type="number" class="form-control-premium" name="coef" placeholder="Coef"></td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
-            </div>
 
-            <!-- Saisie des Notes -->
-            <h2>Saisie des Notes</h2>
-            <table class="table table-bordered">
-                <thead>
-                    <tr>
-                        <th>Matière</th>
-                        <th>Note de Classe 1</th>
-                        <th>Note de Classe 2</th>
-                      
-                        <th>Note de Compétition</th>
-                         <th>Nom du Prof</th>
-                        <th>Coefficient</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Comp. Française</td>
-                        <td><input type="text" class="form-control" name="noteClasseFrancaise1" placeholder="Saisir la 1ère note" required></td>
-                        <td><input type="text" class="form-control" name="noteClasseFrancaise2" placeholder="Saisir la 2ème note" required></td>
-                     
-                        <td><input type="text" class="form-control" name="noteCompFrancaise" placeholder="Saisir la note de compétition" required></td>
-                         <td><input type="text" class="form-control" name="profCompFrancaise" placeholder="Saisir le nom du Prof" required></td>
-                        <td>3</td>
-                    </tr>
+                <!-- Signatures -->
+                <div class="card-section">
+                    <h2 style="font-size: 1.2rem; color: var(--accent-color); margin-bottom: 1.5rem; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 0.5rem;">
+                        <i class="fas fa-signature"></i> Signatures par défaut
+                    </h2>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                        <div>
+                            <label for="titu" class="form-label">Titulaire de classe</label>
+                            <input type="text" id="titu" name="titu" class="form-control-premium" placeholder="Nom du Titulaire" required>
+                        </div>
+                        <div>
+                            <label for="directeur" class="form-label">Le Directeur</label>
+                            <input type="text" id="directeur" name="directeur" class="form-control-premium" placeholder="Nom du Directeur" required>
+                        </div>
+                    </div>
+                </div>
 
-                 
+                <div style="text-align: center; margin: 3rem 0;">
+                    <button type="submit" class="btn-premium" style="width: 100%; max-width: 400px; font-size: 1.3rem;">
+                        <i class="fas fa-save"></i> Enregistrer le Bulletin
+                    </button>
+                </div>
+            </form>
+        </div>
+    </main>
 
-                     <tr>
-                        <td>Anglais</td>
-                        <td><input type="text" class="form-control" name="noteClasseAnglais1" placeholder="Saisir la 1ère note" required></td>
-                        <td><input type="text" class="form-control" name="noteClasseAnglais2" placeholder="Saisir la 2ème note" required></td>
-                  
-                        <td><input type="text" class="form-control" name="noteCompAnglais" placeholder="Saisir la note de compétition" required></td>
-                         <td><input type="text" class="form-control" name="profCompAnglais" placeholder="Saisir le nom du Prof" required></td>
-                        <td>2</td>
-
-                    </tr>
-
-                    <!-- Histoire-géo -->
-                <tr>
-                    <td>Histoire-géo</td>
-                    <td><input type="text" class="form-control" name="noteClasseHistoireGeo1" placeholder="Saisir la 1ère note" required></td>
-                    <td><input type="text" class="form-control" name="noteClasseHistoireGeo2" placeholder="Saisir la 2ème note" required></td>
-                    
-                    <td><input type="text" class="form-control" name="noteCompHistoireGeo" placeholder="Saisir la note de compétence" required></td>
-                     <td><input type="text" class="form-control" name="profCompHistoireGeo" placeholder="Saisir le nom du Prof" required></td>
-                    <td>2</td>
-                </tr>
-
-                <!-- ECM -->
-                <tr>
-                    <td>ECM</td>
-                    <td><input type="text" class="form-control" name="noteClasseECM1" placeholder="Saisir la 1ère note" required></td>
-                    <td><input type="text" class="form-control" name="noteClasseECM2" placeholder="Saisir la 2ème note" required></td>
-                    
-                    <td><input type="text" class="form-control" name="noteCompECM" placeholder="Saisir la note de compétence" required></td>
-                     <td><input type="text" class="form-control" name="profCompECM" placeholder="Saisir le nom du Prof" required></td>
-                    <td>2</td>
-                </tr>
-
-                <!-- Mathématiques -->
-                <tr>
-                    <td>Mathématiques</td>
-                    <td><input type="text" class="form-control" name="noteClasseMath1" placeholder="Saisir la 1ère note" required></td>
-                    <td><input type="text" class="form-control" name="noteClasseMath2" placeholder="Saisir la 2ème note" required></td>
-                   
-                    <td><input type="text" class="form-control" name="noteCompMath" placeholder="Saisir la note de compétence" required></td>
-                     <td><input type="text" class="form-control" name="profCompMath" placeholder="Saisir le nom du Prof" required></td>
-                    <td>3</td>
-                </tr>
-
-                <!-- Science de la Vie et de la Terre (SVT) -->
-                <tr>
-                    <td>SVT</td>
-                    <td><input type="text" class="form-control" name="noteClasseSVT1" placeholder="Saisir la 1ère note" required></td>
-                    <td><input type="text" class="form-control" name="noteClasseSVT2" placeholder="Saisir la 2ème note" required></td>
-                
-                    <td><input type="text" class="form-control" name="noteCompSVT" placeholder="Saisir la note de compétence" required></td>
-                     <td><input type="text" class="form-control" name="profCompSVT" placeholder="Saisir le nom du Prof" required></td>
-                    <td>2</td>
-                </tr>
-
-                <!-- Science Physique -->
-                <tr>
-                    <td>PCT / P-C </td>
-                    <td><input type="text" class="form-control" name="noteClassePhysique1" placeholder="Saisir la 1ère note" required></td>
-                    <td><input type="text" class="form-control" name="noteClassePhysique2" placeholder="Saisir la 2ème note" required></td>
-               
-                    <td><input type="text" class="form-control" name="noteCompPhysique" placeholder="Saisir la note de compétence" required></td>
-                     <td><input type="text" class="form-control" name="profCompPhysique" placeholder="Saisir le nom du Prof" required></td>
-                    <td>3</td>
-                </tr>
-
-                <!-- Education Physique et Sportive (EPS) -->
-                <tr>
-                    <td>EPS</td>
-                    <td><input type="text" class="form-control" name="noteClasseEPS1" placeholder="Saisir la 1ère note" ></td>
-                    <td><input type="text" class="form-control" name="noteClasseEPS2" placeholder="Saisir la 2ème note" ></td>
-                    <td><input type="text" class="form-control" name="noteCompEPS" placeholder="Saisir la note de compétition" ></td>
-                    <td> <input type="text" class="form-control" name="profCompEPS" placeholder="Saisir le nom du Prof"></td>
-                    <td><input type="number" class="form-control" name="coefE" placeholder="CoefE" ></td>
-                </tr>
-
-                <tr>
-                    <td>Musique/EM/Ewe/Kabye/Couture <br>Espagnol/Dessin</td>
-                    <td><input type="text" class="form-control" name="noteClasseFac1" placeholder="Saisir la 1ère note" ></td>
-                    <td><input type="text" class="form-control" name="noteClasseFac2" placeholder="Saisir la 2ème note" ></td>
-                    <td><input type="text" class="form-control" name="noteCompFac" placeholder="Saisir la note de compétition" ></td>
-                    <td> <input type="text" class="form-control" name="profCompFac" placeholder="Saisir le nom du Prof"></td>
-                    <td><input type="number" class="form-control" name="coef" placeholder="Coef" ></td>
-                </tr>
-
-
-
-
-                </tbody>
-            </table>
-
-
-            <div class="mb-2">
-                <label for="nomEleve" class="form-label"><strong>Titulaire :</strong></label>
-                <input type="text" id="titu" name="titu" class="form-control" placeholder="Ex: Codeur D. Chaminade" required>
-            </div>
-
-            <div class="mb-2">
-                <label for="nomEleve" class="form-label"><strong>Directeur :</strong></label>
-                <input type="text" id="directeur" name="directeur" class="form-control" placeholder="Ex: Codeur D. Chaminade" required>
-            </div>
-           
-
-            <div class="text-center mt-4">
-                <button type="submit" class="btn btn-primary">Soumettre</button>
-            </div>
-        </form>
-    </div>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+    <footer style="padding: 2rem 0; opacity: 0.5;">
+        <p>Bulletin Jsauveur &copy; 2024 - Tous droits réservés</p>
+    </footer>
 </body>
-
 </html>

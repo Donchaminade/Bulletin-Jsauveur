@@ -1,0 +1,274 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+
+:root {
+    --primary-color: #0a0a81;
+    --primary-light: #1e1ec7;
+    --secondary-color: #b30000;
+    --secondary-hover: #e60000;
+    --accent-color: #ffd700;
+    
+    /* Design Blanc Premium */
+    --card-bg: #ffffff;
+    --text-color-dark: #1a1a1a;
+    --text-color-light: #ffffff;
+    --input-bg: #fdfdfd;
+    --input-border: #d1d5db;
+    
+    --glass-bg: rgba(255, 255, 255, 0.1);
+    --glass-border: rgba(255, 255, 255, 0.2);
+    --card-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+    --border-radius: 16px;
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body, html {
+    font-family: 'Inter', sans-serif;
+    height: 100%;
+    color: var(--text-color-light);
+    background-image: url('CS.png');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    overflow-x: hidden;
+}
+
+/* Overlay pour l'image de fond */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at center, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.85) 100%);
+    z-index: -1;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(179, 0, 0, 0.7); }
+    70% { transform: scale(1.03); box-shadow: 0 0 0 10px rgba(179, 0, 0, 0); }
+    100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(179, 0, 0, 0); }
+}
+
+.animate-fade-in {
+    animation: fadeIn 0.8s ease-out forwards;
+}
+
+/* Layouts */
+.main-container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+/* Cards & Containers (Landing & Nav) */
+.glass-card {
+    background: var(--card-bg);
+    color: var(--text-color-dark);
+    border-radius: var(--border-radius);
+    border: none;
+    box-shadow: var(--card-shadow);
+    padding: 3rem;
+    text-align: center;
+    max-width: 800px;
+    width: 100%;
+}
+
+/* Spécifique pour les titres sur fond blanc */
+.glass-card h1 {
+    background: linear-gradient(to right, var(--primary-color), var(--primary-light));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: 3rem;
+}
+
+.glass-card p {
+    color: #4b5563;
+}
+
+/* Header / Navbar */
+.premium-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 12px 40px;
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(10px);
+    z-index: 1000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.nav-link {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #fff;
+    text-decoration: none;
+    padding: 8px 18px;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    transition: var(--transition);
+    font-weight: 600;
+    font-size: 0.95rem;
+}
+
+.nav-link:hover {
+    background: var(--primary-light);
+    transform: translateY(-2px);
+}
+
+.nav-link.home { background: #15803d; }
+.nav-link.back { background: #b45309; }
+
+/* Form Elements (WHITE PREMIUM) */
+.form-container {
+    margin-top: 90px;
+    width: 95%;
+    max-width: 1200px;
+}
+
+.card-section {
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 30px;
+    margin-bottom: 25px;
+    border: none;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+    color: var(--text-color-dark);
+}
+
+.form-label {
+    font-weight: 700;
+    margin-bottom: 8px;
+    display: block;
+    font-size: 0.85rem;
+    color: var(--primary-color);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.form-control-premium {
+    width: 100%;
+    background: var(--input-bg);
+    border: 1.5px solid var(--input-border);
+    border-radius: 8px;
+    padding: 12px 15px;
+    color: var(--text-color-dark);
+    transition: var(--transition);
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.form-control-premium:focus {
+    background: #ffffff;
+    border-color: var(--primary-color);
+    outline: none;
+    box-shadow: 0 0 0 4px rgba(10, 10, 129, 0.15);
+}
+
+.form-control-premium::placeholder {
+    color: #9ca3af;
+    font-weight: 400;
+}
+
+/* Tables */
+.table-premium {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    margin-top: 1rem;
+    color: var(--text-color-dark);
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid #e5e7eb;
+}
+
+.table-premium th {
+    background: #f3f4f6;
+    color: var(--text-color-dark);
+    padding: 15px;
+    text-align: left;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 1px;
+    border-bottom: 2px solid #e5e7eb;
+}
+
+.table-premium td {
+    background: #ffffff;
+    padding: 12px 15px;
+    border-bottom: 1px solid #f3f4f6;
+    transition: var(--transition);
+}
+
+.table-premium tr:hover td {
+    background: #f9fafb;
+}
+
+.table-premium tr:last-child td {
+    border-bottom: none;
+}
+
+/* Boutons */
+.btn-premium {
+    display: inline-block;
+    padding: 18px 45px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: #fff;
+    background: linear-gradient(135deg, var(--secondary-color), var(--secondary-hover));
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: var(--transition);
+    box-shadow: 0 8px 25px rgba(179, 0, 0, 0.4);
+}
+
+.btn-premium:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 30px rgba(179, 0, 0, 0.5);
+}
+
+.btn-pulse {
+    animation: pulse 2.5s infinite;
+}
+
+/* Footer */
+footer {
+    margin-top: 3rem;
+    padding: 2rem 0;
+    font-size: 0.9rem;
+    color: #9ca3af;
+    text-align: center;
+}
+
+@media (max-width: 768px) {
+    .glass-card { padding: 2rem; }
+    .glass-card h1 { font-size: 2.2rem; }
+    .premium-header { padding: 12px 20px; }
+    .nav-link span { display: none; }
+}
