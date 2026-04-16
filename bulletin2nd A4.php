@@ -161,11 +161,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $profCompEPS = isset($_POST['profCompEPS']) && trim($_POST['profCompEPS']) !== '' ? htmlspecialchars($_POST['profCompEPS']) : '';
     $coefE = isset($_POST['coefE']) && $_POST['coefE'] !== '' ? htmlspecialchars($_POST['coefE']) : 0;
 
-    // $noteClasseEsp1 = isset($_POST['noteClasseEsp1']) && $_POST['noteClasseEsp1'] !== '' ? (float) htmlspecialchars($_POST['noteClasseEsp1']) : 0;
-    // $noteClasseEsp2 = isset($_POST['noteClasseEsp2']) && $_POST['noteClasseEsp2'] !== '' ? (float) htmlspecialchars($_POST['noteClasseEsp2']) : 0;
-    // $noteCompEsp = isset($_POST['noteCompEsp']) && $_POST['noteCompEsp'] !== '' ? (float) htmlspecialchars($_POST['noteCompEsp']) : 0;
-    // $profCompEsp = isset($_POST['profCompEsp']) && trim($_POST['profCompEsp']) !== '' ? htmlspecialchars($_POST['profCompEsp']) : '';
-    // $coefEsp = isset($_POST['coefEsp']) && $_POST['coefEsp'] !== '' ? htmlspecialchars($_POST['coefEsp']) : 0;
+    $noteClasseEsp1 = isset($_POST['noteClasseEsp1']) && $_POST['noteClasseEsp1'] !== '' ? (float) htmlspecialchars($_POST['noteClasseEsp1']) : 0;
+    $noteClasseEsp2 = isset($_POST['noteClasseEsp2']) && $_POST['noteClasseEsp2'] !== '' ? (float) htmlspecialchars($_POST['noteClasseEsp2']) : 0;
+    $noteCompEsp = isset($_POST['noteCompEsp']) && $_POST['noteCompEsp'] !== '' ? (float) htmlspecialchars($_POST['noteCompEsp']) : 0;
+    $profCompEsp = isset($_POST['profCompEsp']) && trim($_POST['profCompEsp']) !== '' ? htmlspecialchars($_POST['profCompEsp']) : '';
+    $coefEsp = 2; // Espagnol obligatoire en A4
 
     // Matière facultative
     $noteClasseFac1 = isset($_POST['noteClasseFac1']) && $_POST['noteClasseFac1'] !== '' ? (float) htmlspecialchars($_POST['noteClasseFac1']) : 0;
@@ -189,7 +189,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $moyenneMath = calculerMoyenne($noteClasseMath1, $noteClasseMath2);
     $moyenneSVT = calculerMoyenne($noteClasseSVT1, $noteClasseSVT2);
     $moyennePhysique = calculerMoyenne($noteClassePhysique1, $noteClassePhysique2);
-    // $moyenneEsp = calculerMoyenne($noteClasseEsp1, $noteClasseEsp2);
+    $moyenneEsp = calculerMoyenne($noteClasseEsp1, $noteClasseEsp2);
     $moyenneEPS = calculerMoyenne($noteClasseEPS1, $noteClasseEPS2);
     $moyenneFac = calculerMoyenne($noteClasseFac1, $noteClasseFac2);
 
@@ -215,7 +215,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
     // Calcul du total des coefficients
-    $totalcoef = 21 + (float)$coef + (float)$coefE  ;
+    $totalcoef = 23 + (float)$coef + (float)$coefE  ;
 
     // Calcul de la somme des moyennes avec coefficients
     $sommeMoyennes = (
@@ -229,7 +229,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         ((($moyenneAll + $noteCompAll) / 2)* 2)+ //Allemand
         ((($noteCompPhysique + $moyennePhysique) / 2) * 1) +
         ((($noteCompEPS + $moyenneEPS) / 2) * $coefE) +
-        // ((($noteCompEsp + $moyenneEsp) / 2) * $coefEsp) +
+        ((($noteCompEsp + $moyenneEsp) / 2) * $coefEsp) +
         ((($noteCompFac + $moyenneFac) / 2) * $coef));
 
     // Fonction pour éviter la division par zéro
@@ -253,7 +253,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $observationMath = determinerObservation(($moyenneMath + $noteCompMath) / 2);
     $observationSVT = determinerObservation(($moyenneSVT + $noteCompSVT) / 2);
     $observationPhysique = determinerObservation(($moyennePhysique + $noteCompPhysique) / 2);
-    // $observationEsp = determinerObservation(($moyenneEsp + $noteCompEsp) / 2);
+    $observationEsp = determinerObservation(($moyenneEsp + $noteCompEsp) / 2);
     $observationEPS = determinerObservation(($moyenneEPS + $noteCompEPS) / 2);
     $observationFac = determinerObservation(($moyenneFac + $noteCompFac) / 2);
 
@@ -357,11 +357,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <td><?php echo $noteClasseECM1; ?></td>
                 <td><?php echo $noteClasseECM2; ?></td>
                 
-                <td><?php echo number_format($moyenneECM, 2); ?></td>
+                <td><?php echo number_format(floor(($moyenneECM) * 100) / 100, 2); ?></td>
                 <td><?php echo $noteCompECM; ?></td>
-                <td><?php echo number_format(($moyenneECM + $noteCompECM) / 2, 2); ?></td>
+                <td><?php echo number_format(floor((($moyenneECM + $noteCompECM) / 2) * 100) / 100, 2); ?></td>
                 <td>2</td>
-                <td><?php echo number_format((($noteCompECM + $moyenneECM)/2) * 2,2);?></td>
+                <td><?php echo number_format(floor(((($noteCompECM + $moyenneECM)/2) * 2) * 100) / 100, 2); ?></td>
                 <td><?php echo $observationECM; ?></td>
                <td><?php echo $profCompECM; ?></td>
                 <td></td>
@@ -393,6 +393,21 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <td><?php echo number_format((($noteCompAll + $moyenneAll)/2) * 2,2);?></td>
                 <td><?php echo $observationAll; ?></td>
                <td><?php echo $profCompAll; ?></td>
+                <td></td>
+            </tr>
+
+            <tr>
+                <td>Espagnol</td>
+                <td><?php echo $noteClasseEsp1; ?></td>
+                <td><?php echo $noteClasseEsp2; ?></td>
+                
+                <td><?php echo number_format($moyenneEsp, 2); ?></td>
+                <td><?php echo $noteCompEsp; ?></td>
+                <td><?php echo number_format(($moyenneEsp + $noteCompEsp) / 2, 2); ?></td>
+                <td>2</td>
+                <td><?php echo number_format((($noteCompEsp + $moyenneEsp)/2) * 2,2);?></td>
+                <td><?php echo $observationEsp; ?></td>
+               <td><?php echo $profCompEsp; ?></td>
                 <td></td>
             </tr>
 
@@ -558,7 +573,7 @@ echo number_format($sommeMoyennes, 2)
             <td>..................</td>
             <td>Moyenne du 1er Semestre:</td>
             <td>
-                <?php if ($trimestre == 1) echo number_format($resultat, 2); ?>
+                <?php if ($trimestre == 1) echo number_format(floor(($resultat) * 100) / 100, 2, ',', ' '); ?>
             </td>
             <td>Rang: ..............</td>
             <td>Moy. la plus forte: ...............</td>
@@ -569,7 +584,7 @@ echo number_format($sommeMoyennes, 2)
             <td>..................</td>
             <td>Moyenne du 2ème Semestre:</td>
             <td>
-                <?php if ($trimestre == 2) echo number_format($resultat, 2); ?>
+                <?php if ($trimestre == 2) echo number_format(floor(($resultat) * 100) / 100, 2, ',', ' '); ?>
             </td>
                 <td>Rang: ..............</td>
                 <td>Moy. la plus faible: ...............</td>
@@ -579,7 +594,7 @@ echo number_format($sommeMoyennes, 2)
             <td>..................</td>
             <td>Moyenne du 3ème Semestre:</td>
             <td>
-                <?php if ($trimestre == 3) echo number_format($resultat, 2); ?>
+                <?php if ($trimestre == 3) echo number_format(floor(($resultat) * 100) / 100, 2, ',', ' '); ?>
             </td>
             <td>Rang: ..............</td>
             <td>Moy. Generale: ...............</td>

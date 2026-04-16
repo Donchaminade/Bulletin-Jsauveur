@@ -480,7 +480,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <td>..................</td>
             <td>Moyenne du 1er Semestre:</td>
             <td>
-                <?php if ($trimestre == 1) echo number_format($resultat, 2); ?>
+                <?php if ($trimestre == 1) echo number_format(floor(($resultat) * 100) / 100, 2, ',', ' '); ?>
             </td>
             <td>Rang: ..............</td>
             <td>Moy. la plus forte: ...............</td>
@@ -491,7 +491,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <td>..................</td>
             <td>Moyenne du 2ème Semestre:</td>
             <td>
-                <?php if ($trimestre == 2) echo number_format($resultat, 2); ?>
+                <?php if ($trimestre == 2) echo number_format(floor(($resultat) * 100) / 100, 2, ',', ' '); ?>
             </td>
                 <td>Rang: ..............</td>
                 <td>Moy. la plus faible: ...............</td>
@@ -501,7 +501,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <td>..................</td>
             <td>Moyenne du 3ème Semestre:</td>
             <td>
-                <?php if ($trimestre == 3) echo number_format($resultat, 2); ?>
+                <?php if ($trimestre == 3) echo number_format(floor(($resultat) * 100) / 100, 2, ',', ' '); ?>
             </td>
             <td>Rang: ..............</td>
             <td>Moy. Generale: ...............</td>

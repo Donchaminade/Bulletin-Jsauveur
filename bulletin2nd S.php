@@ -90,11 +90,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $profCompEPS = isset($_POST['profCompEPS']) && trim($_POST['profCompEPS']) !== '' ? htmlspecialchars($_POST['profCompEPS']) : '';
     $coefE = isset($_POST['coefE']) && $_POST['coefE'] !== '' ? htmlspecialchars($_POST['coefE']) : 0;
 
-    // $noteClasseEsp1 = isset($_POST['noteClasseEsp1']) && $_POST['noteClasseEsp1'] !== '' ? (float) htmlspecialchars($_POST['noteClasseEsp1']) : 0;
-    // $noteClasseEsp2 = isset($_POST['noteClasseEsp2']) && $_POST['noteClasseEsp2'] !== '' ? (float) htmlspecialchars($_POST['noteClasseEsp2']) : 0;
-    // $noteCompEsp = isset($_POST['noteCompEsp']) && $_POST['noteCompEsp'] !== '' ? (float) htmlspecialchars($_POST['noteCompEsp']) : 0;
-    // $profCompEsp = isset($_POST['profCompEsp']) && trim($_POST['profCompEsp']) !== '' ? htmlspecialchars($_POST['profCompEsp']) : '';
-    // $coefEsp = isset($_POST['coefEsp']) && $_POST['coefEsp'] !== '' ? htmlspecialchars($_POST['coefEsp']) : 0;
+    $noteClasseEsp1 = isset($_POST['noteClasseEsp1']) && $_POST['noteClasseEsp1'] !== '' ? (float) htmlspecialchars($_POST['noteClasseEsp1']) : 0;
+    $noteClasseEsp2 = isset($_POST['noteClasseEsp2']) && $_POST['noteClasseEsp2'] !== '' ? (float) htmlspecialchars($_POST['noteClasseEsp2']) : 0;
+    $noteCompEsp = isset($_POST['noteCompEsp']) && $_POST['noteCompEsp'] !== '' ? (float) htmlspecialchars($_POST['noteCompEsp']) : 0;
+    $profCompEsp = isset($_POST['profCompEsp']) && trim($_POST['profCompEsp']) !== '' ? htmlspecialchars($_POST['profCompEsp']) : '';
+    $coefEsp = 2;
+
+    $noteClasseAll1 = isset($_POST['noteClasseAll1']) && $_POST['noteClasseAll1'] !== '' ? (float) htmlspecialchars($_POST['noteClasseAll1']) : 0;
+    $noteClasseAll2 = isset($_POST['noteClasseAll2']) && $_POST['noteClasseAll2'] !== '' ? (float) htmlspecialchars($_POST['noteClasseAll2']) : 0;
+    $noteCompAll = isset($_POST['noteCompAll']) && $_POST['noteCompAll'] !== '' ? (float) htmlspecialchars($_POST['noteCompAll']) : 0;
+    $profCompAll = isset($_POST['profCompAll']) && trim($_POST['profCompAll']) !== '' ? htmlspecialchars($_POST['profCompAll']) : '';
+    $coefAll = 2;
 
     // Matière facultative
     $noteClasseFac1 = isset($_POST['noteClasseFac1']) && $_POST['noteClasseFac1'] !== '' ? (float) htmlspecialchars($_POST['noteClasseFac1']) : 0;
@@ -117,7 +123,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $moyenneMath = calculerMoyenne($noteClasseMath1, $noteClasseMath2);
     $moyenneSVT = calculerMoyenne($noteClasseSVT1, $noteClasseSVT2);
     $moyennePhysique = calculerMoyenne($noteClassePhysique1, $noteClassePhysique2);
-    // $moyenneEsp = calculerMoyenne($noteClasseEsp1, $noteClasseEsp2);
+    $moyenneEsp = calculerMoyenne($noteClasseEsp1, $noteClasseEsp2);
+    $moyenneAll = calculerMoyenne($noteClasseAll1, $noteClasseAll2);
     $moyenneEPS = calculerMoyenne($noteClasseEPS1, $noteClasseEPS2);
     $moyenneFac = calculerMoyenne($noteClasseFac1, $noteClasseFac2);
 
@@ -143,7 +150,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
     // Calcul du total des coefficients
-    $totalcoef = 20 + (float)$coef + (float)$coefE ;
+    $totalcoef = 24 + (float)$coef + (float)$coefE ;
 
     // Calcul de la somme des moyennes avec coefficients
     $sommeMoyennes = (
@@ -154,7 +161,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         ((($noteCompMath + $moyenneMath) / 2) * 4) +
         ((($noteCompSVT + $moyenneSVT) / 2) * 3) +
         ((($moyennePhilo + $noteCompPhilo) / 2)* 2)+ //philo
-        // ((($moyenneEsp + $noteCompEsp) / 2) *$coefEsp)+ //espagnol
+        ((($noteCompEsp + $moyenneEsp) / 2) * $coefEsp) + 
+        ((($noteCompAll + $moyenneAll) / 2) * $coefAll) + 
         ((($noteCompPhysique + $moyennePhysique) / 2) * 3) +
         ((($noteCompEPS + $moyenneEPS) / 2) * $coefE) +
         ((($noteCompFac + $moyenneFac) / 2) * $coef));
@@ -179,7 +187,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $observationMath = determinerObservation(($moyenneMath + $noteCompMath) / 2);
     $observationSVT = determinerObservation(($moyenneSVT + $noteCompSVT) / 2);
     $observationPhysique = determinerObservation(($moyennePhysique + $noteCompPhysique) / 2);
-    // $observationEsp = determinerObservation(($moyenneEsp + $noteCompEsp) / 2);
+    $observationEsp = determinerObservation(($moyenneEsp + $noteCompEsp) / 2);
+    $observationAll = determinerObservation(($moyenneAll + $noteCompAll) / 2);
     $observationEPS = determinerObservation(($moyenneEPS + $noteCompEPS) / 2);
     $observationFac = determinerObservation(($moyenneFac + $noteCompFac) / 2);
 
@@ -297,11 +306,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <td><?php echo $noteClassePhilo1; ?></td>
                 <td><?php echo $noteClassePhilo2; ?></td>
                 
-                <td><?php echo number_format($moyennePhilo, 2); ?></td>
+                <td><?php echo number_format(floor(($moyennePhilo) * 100) / 100, 2, ',', ' '); ?></td>
                 <td><?php echo $noteCompPhilo; ?></td>
-                <td><?php echo number_format(($moyennePhilo + $noteCompPhilo) / 2, 2); ?></td>
+                <td><?php echo number_format(floor((($moyennePhilo + $noteCompPhilo) / 2) * 100) / 100, 2, ',', ' '); ?></td>
                 <td>2</td>
-                <td><?php echo number_format((($noteCompPhilo + $moyennePhilo)/2) * 2,2);?></td>
+                <td><?php echo number_format(floor((($noteCompPhilo + $moyennePhilo)/2) * 2) * 100) / 100, 2, ',', ' ');?></td>
                 <td><?php echo $observationPhilo; ?></td>
                <td><?php echo $profCompPhilo; ?></td>
                 <td></td>
@@ -321,8 +330,36 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <td><?php echo $observationAnglais; ?></td>
                    <td><?php echo $profCompAnglais; ?></td>                   
                     <td></td>
+                </tr>
 
-                   
+                <tr>
+                    <td>Espagnol</td>
+                    <td><?php echo $noteClasseEsp1; ?></td>
+                    <td><?php echo $noteClasseEsp2; ?></td>
+                    
+                    <td><?php echo number_format($moyenneEsp, 2); ?></td>
+                    <td><?php echo $noteCompEsp; ?></td>
+                    <td><?php echo number_format(($moyenneEsp + $noteCompEsp) / 2, 2); ?></td>
+                    <td>2</td>
+                    <td><?php echo number_format((($noteCompEsp + $moyenneEsp)/2) * 2,2);?></td>
+                    <td><?php echo $observationEsp; ?></td>
+                   <td><?php echo $profCompEsp; ?></td>
+                    <td></td>
+                </tr>
+
+                <tr>
+                    <td>Allemand</td>
+                    <td><?php echo $noteClasseAll1; ?></td>
+                    <td><?php echo $noteClasseAll2; ?></td>
+                    
+                    <td><?php echo number_format($moyenneAll, 2); ?></td>
+                    <td><?php echo $noteCompAll; ?></td>
+                    <td><?php echo number_format(($moyenneAll + $noteCompAll) / 2, 2); ?></td>
+                    <td>2</td>
+                    <td><?php echo number_format((($noteCompAll + $moyenneAll)/2) * 2,2);?></td>
+                    <td><?php echo $observationAll; ?></td>
+                   <td><?php echo $profCompAll; ?></td>
+                    <td></td>
                 </tr>
 
                 <!-- Histoire-géo -->

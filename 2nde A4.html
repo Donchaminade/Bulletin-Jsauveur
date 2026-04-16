@@ -41,7 +41,7 @@
                         </div>
                         <div>
                             <label for="classe" class="form-label">Classe</label>
-                            <input type="text" id="classe" name="classe" class="form-control-premium" placeholder="Ex: 2nde A4" required>
+                            <input type="text" id="classe" name="classe" class="form-control-premium" value="2nde A4" readonly>
                         </div>
                         <div>
                             <label for="effectif" class="form-label">Effectif</label>
@@ -79,89 +79,97 @@
                             <tbody>
                                 <tr>
                                     <td><strong>Comp. Français</strong></td>
-                                    <td><input type="text" class="form-control-premium" name="noteClasseFrancaise1" required></td>
-                                    <td><input type="text" class="form-control-premium" name="noteClasseFrancaise2" required></td>
-                                    <td><input type="text" class="form-control-premium" name="noteCompFrancaise" required></td>
+                                    <td><input type="number" step="0.01" min="0" max="99.99" class="form-control-premium" name="noteClasseFrancaise1" required></td>
+                                    <td><input type="number" step="0.01" min="0" max="99.99" class="form-control-premium" name="noteClasseFrancaise2" required></td>
+                                    <td><input type="number" step="0.01" min="0" max="99.99" class="form-control-premium" name="noteCompFrancaise" required></td>
                                     <td><input type="text" class="form-control-premium" name="profCompFrancaise" required></td>
                                     <td style="text-align: center;">4</td>
                                 </tr>
                                 <tr>
                                     <td><strong>Anglais</strong></td>
-                                    <td><input type="text" class="form-control-premium" name="noteClasseAnglais1" required></td>
-                                    <td><input type="text" class="form-control-premium" name="noteClasseAnglais2" required></td>
-                                    <td><input type="text" class="form-control-premium" name="noteCompAnglais" required></td>
+                                    <td><input type="number" step="0.01" min="0" max="99.99" class="form-control-premium" name="noteClasseAnglais1" required></td>
+                                    <td><input type="number" step="0.01" min="0" max="99.99" class="form-control-premium" name="noteClasseAnglais2" required></td>
+                                    <td><input type="number" step="0.01" min="0" max="99.99" class="form-control-premium" name="noteCompAnglais" required></td>
                                     <td><input type="text" class="form-control-premium" name="profCompAnglais" required></td>
                                     <td style="text-align: center;">3</td>
                                 </tr>
                                 <tr>
                                     <td><strong>Histoire-Géo</strong></td>
-                                    <td><input type="text" class="form-control-premium" name="noteClasseHistoireGeo1" required></td>
-                                    <td><input type="text" class="form-control-premium" name="noteClasseHistoireGeo2" required></td>
-                                    <td><input type="text" class="form-control-premium" name="noteCompHistoireGeo" required></td>
+                                    <td><input type="number" step="0.01" min="0" max="99.99" class="form-control-premium" name="noteClasseHistoireGeo1" required></td>
+                                    <td><input type="number" step="0.01" min="0" max="99.99" class="form-control-premium" name="noteClasseHistoireGeo2" required></td>
+                                    <td><input type="number" step="0.01" min="0" max="99.99" class="form-control-premium" name="noteCompHistoireGeo" required></td>
                                     <td><input type="text" class="form-control-premium" name="profCompHistoireGeo" required></td>
                                     <td style="text-align: center;">3</td>
                                 </tr>
                                 <tr>
                                     <td><strong>Philosophie</strong></td>
-                                    <td><input type="text" class="form-control-premium" name="noteClassePhilo1" required></td>
-                                    <td><input type="text" class="form-control-premium" name="noteClassePhilo2" required></td>
-                                    <td><input type="text" class="form-control-premium" name="noteCompPhilo" required></td>
+                                    <td><input type="number" step="0.01" min="0" max="99.99" class="form-control-premium" name="noteClassePhilo1" required></td>
+                                    <td><input type="number" step="0.01" min="0" max="99.99" class="form-control-premium" name="noteClassePhilo2" required></td>
+                                    <td><input type="number" step="0.01" min="0" max="99.99" class="form-control-premium" name="noteCompPhilo" required></td>
                                     <td><input type="text" class="form-control-premium" name="profCompPhilo" required></td>
                                     <td style="text-align: center;">3</td>
                                 </tr>
                                 <tr>
                                     <td><strong>Allemand</strong></td>
-                                    <td><input type="text" class="form-control-premium" name="noteClasseAll1" required></td>
-                                    <td><input type="text" class="form-control-premium" name="noteClasseAll2" required></td>
-                                    <td><input type="text" class="form-control-premium" name="noteCompAll" required></td>
+                                    <td><input type="number" step="0.01" min="0" max="99.99" class="form-control-premium" name="noteClasseAll1" required></td>
+                                    <td><input type="number" step="0.01" min="0" max="99.99" class="form-control-premium" name="noteClasseAll2" required></td>
+                                    <td><input type="number" step="0.01" min="0" max="99.99" class="form-control-premium" name="noteCompAll" required></td>
                                     <td><input type="text" class="form-control-premium" name="profCompAll" required></td>
                                     <td style="text-align: center;">2</td>
                                 </tr>
                                 <tr>
+                                    <td><strong>Espagnol</strong></td>
+                                    <td><input type="number" step="0.01" min="0" max="99.99" class="form-control-premium" name="noteClasseEsp1" required></td>
+                                    <td><input type="number" step="0.01" min="0" max="99.99" class="form-control-premium" name="noteClasseEsp2" required></td>
+                                    <td><input type="number" step="0.01" min="0" max="99.99" class="form-control-premium" name="noteCompEsp" required></td>
+                                    <td><input type="text" class="form-control-premium" name="profCompEsp" required></td>
+                                    <td style="text-align: center;">2</td>
+                                </tr>
+                                <tr>
                                     <td><strong>ECM</strong></td>
-                                    <td><input type="text" class="form-control-premium" name="noteClasseECM1" required></td>
-                                    <td><input type="text" class="form-control-premium" name="noteClasseECM2" required></td>
-                                    <td><input type="text" class="form-control-premium" name="noteCompECM" required></td>
+                                    <td><input type="number" step="0.01" min="0" max="99.99" class="form-control-premium" name="noteClasseECM1" required></td>
+                                    <td><input type="number" step="0.01" min="0" max="99.99" class="form-control-premium" name="noteClasseECM2" required></td>
+                                    <td><input type="number" step="0.01" min="0" max="99.99" class="form-control-premium" name="noteCompECM" required></td>
                                     <td><input type="text" class="form-control-premium" name="profCompECM" required></td>
                                     <td style="text-align: center;">2</td>
                                 </tr>
                                 <tr>
                                     <td><strong>Mathématiques</strong></td>
-                                    <td><input type="text" class="form-control-premium" name="noteClasseMath1" required></td>
-                                    <td><input type="text" class="form-control-premium" name="noteClasseMath2" required></td>
-                                    <td><input type="text" class="form-control-premium" name="noteCompMath" required></td>
+                                    <td><input type="number" step="0.01" min="0" max="99.99" class="form-control-premium" name="noteClasseMath1" required></td>
+                                    <td><input type="number" step="0.01" min="0" max="99.99" class="form-control-premium" name="noteClasseMath2" required></td>
+                                    <td><input type="number" step="0.01" min="0" max="99.99" class="form-control-premium" name="noteCompMath" required></td>
                                     <td><input type="text" class="form-control-premium" name="profCompMath" required></td>
                                     <td style="text-align: center;">2</td>
                                 </tr>
                                 <tr>
                                     <td><strong>SVT</strong></td>
-                                    <td><input type="text" class="form-control-premium" name="noteClasseSVT1" required></td>
-                                    <td><input type="text" class="form-control-premium" name="noteClasseSVT2" required></td>
-                                    <td><input type="text" class="form-control-premium" name="noteCompSVT" required></td>
+                                    <td><input type="number" step="0.01" min="0" max="99.99" class="form-control-premium" name="noteClasseSVT1" required></td>
+                                    <td><input type="number" step="0.01" min="0" max="99.99" class="form-control-premium" name="noteClasseSVT2" required></td>
+                                    <td><input type="number" step="0.01" min="0" max="99.99" class="form-control-premium" name="noteCompSVT" required></td>
                                     <td><input type="text" class="form-control-premium" name="profCompSVT" required></td>
                                     <td style="text-align: center;">1</td>
                                 </tr>
                                 <tr>
                                     <td><strong>PCT / P-C</strong></td>
-                                    <td><input type="text" class="form-control-premium" name="noteClassePhysique1" required></td>
-                                    <td><input type="text" class="form-control-premium" name="noteClassePhysique2" required></td>
-                                    <td><input type="text" class="form-control-premium" name="noteCompPhysique" required></td>
+                                    <td><input type="number" step="0.01" min="0" max="99.99" class="form-control-premium" name="noteClassePhysique1" required></td>
+                                    <td><input type="number" step="0.01" min="0" max="99.99" class="form-control-premium" name="noteClassePhysique2" required></td>
+                                    <td><input type="number" step="0.01" min="0" max="99.99" class="form-control-premium" name="noteCompPhysique" required></td>
                                     <td><input type="text" class="form-control-premium" name="profCompPhysique" required></td>
                                     <td style="text-align: center;">1</td>
                                 </tr>
                                 <tr>
                                     <td><strong>EPS</strong></td>
-                                    <td><input type="text" class="form-control-premium" name="noteClasseEPS1"></td>
-                                    <td><input type="text" class="form-control-premium" name="noteClasseEPS2"></td>
-                                    <td><input type="text" class="form-control-premium" name="noteCompEPS"></td>
+                                    <td><input type="number" step="0.01" min="0" max="99.99" class="form-control-premium" name="noteClasseEPS1"></td>
+                                    <td><input type="number" step="0.01" min="0" max="99.99" class="form-control-premium" name="noteClasseEPS2"></td>
+                                    <td><input type="number" step="0.01" min="0" max="99.99" class="form-control-premium" name="noteCompEPS"></td>
                                     <td><input type="text" class="form-control-premium" name="profCompEPS"></td>
                                     <td><input type="number" class="form-control-premium" name="coefE" placeholder="Coef"></td>
                                 </tr>
                                 <tr>
                                     <td><strong>Musique/Dessin...</strong></td>
-                                    <td><input type="text" class="form-control-premium" name="noteClasseFac1"></td>
-                                    <td><input type="text" class="form-control-premium" name="noteClasseFac2"></td>
-                                    <td><input type="text" class="form-control-premium" name="noteCompFac"></td>
+                                    <td><input type="number" step="0.01" min="0" max="99.99" class="form-control-premium" name="noteClasseFac1"></td>
+                                    <td><input type="number" step="0.01" min="0" max="99.99" class="form-control-premium" name="noteClasseFac2"></td>
+                                    <td><input type="number" step="0.01" min="0" max="99.99" class="form-control-premium" name="noteCompFac"></td>
                                     <td><input type="text" class="form-control-premium" name="profCompFac"></td>
                                     <td><input type="number" class="form-control-premium" name="coef" placeholder="Coef"></td>
                                 </tr>
@@ -199,5 +207,6 @@
     <footer style="padding: 2rem 0; opacity: 0.5;">
         <p>Bulletin Jsauveur &copy; 2024 - Tous droits réservés</p>
     </footer>
+    <script src="validator.js"></script>
 </body>
 </html>
