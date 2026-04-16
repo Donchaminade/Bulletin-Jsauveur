@@ -1,0 +1,25 @@
+    // $noteClasseEsp1 = isset($_POST['noteClasseEsp1']) && $_POST['noteClasseEsp1'] !== '' ? (float) htmlspecialchars($_POST['noteClasseEsp1']) : 0;
+    // $noteClasseEsp2 = isset($_POST['noteClasseEsp2']) && $_POST['noteClasseEsp2'] !== '' ? (float) htmlspecialchars($_POST['noteClasseEsp2']) : 0;
+    // $noteCompEsp = isset($_POST['noteCompEsp']) && $_POST['noteCompEsp'] !== '' ? (float) htmlspecialchars($_POST['noteCompEsp']) : 0;
+    // $profCompEsp = isset($_POST['profCompEsp']) && trim($_POST['profCompEsp']) !== '' ? htmlspecialchars($_POST['profCompEsp']) : '';
+    // $coefEsp = isset($_POST['coefEsp']) && $_POST['coefEsp'] !== '' ? htmlspecialchars($_POST['coefEsp']) : 0;
+            
+            
+            
+            <tr>
+                <td>Espagnol</td>
+                <td><?php echo $noteClasseEsp1 ?: ''; ?></td>
+                <td><?php echo $noteClasseEsp2 ?: ''; ?></td>
+
+                <td><?php echo $noteClasseEsp1 || $noteClasseEsp2 ? number_format($moyenneEsp, 2) : ''; ?></td>
+                <td><?php echo (float)$noteCompEsp ?: ''; ?></td>
+                <td><?php echo ($moyenneEsp && $noteCompEsp) ? number_format(($moyenneEsp + $noteCompEsp) / 2, 2) : ''; ?></td>
+                <td><?php echo $coefEsp ?: ''; ?></td>
+                <td><?php echo ($noteCompEsp && $moyenneEPS) ? number_format((($noteCompEsp + $moyenneEsp) / 2) * $coefEsp, 2) : ''; ?></td>
+                <td><?php echo ($noteClasseEsp1 || $noteClasseEsp2 || $noteCompEsp || $moyenneEsp || $coefEsp || $profCompEsp) ? $observationEsp : ''; ?></td>
+                <td><?php echo $profCompEsp ?: ''; ?></td>
+                <td></td>
+            </tr>
+
+
+            
