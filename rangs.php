@@ -227,35 +227,44 @@ $classeSafe = str_replace(' ', '', $classe);
         <table class="table-rangs">
             <thead>
                 <tr>
-                    <th>Rang</th>
-                    <th style="text-align: left;">Nom Complet</th>
-                    <th>Sexe</th>
-                    <th>Moyenne</th>
-                    <th class="action-col no-print">Action</th>
+                    <th style="width: 10%;">Rang</th>
+                    <th style="text-align: left;">Nom Complet des Élèves</th>
+                    <th style="width: 10%;">Sexe</th>
+                    <th style="width: 15%;">Moyenne</th>
+                    <th class="action-col no-print" style="width: 15%;">Action</th>
                 </tr>
             </thead>
             <tbody>
-                <?php foreach ($rankedData as $student): 
+                <?php 
+                $totalStudents = count($rankedData);
+                foreach ($rankedData as $index => $student): 
                     $badgeClass = '';
                     if ($student['rank_val'] == 1) $badgeClass = 'rank-1';
                     elseif ($student['rank_val'] == 2) $badgeClass = 'rank-2';
                     elseif ($student['rank_val'] == 3) $badgeClass = 'rank-3';
                     
-                    // Sécurisation HTML pour JSON payload
+                    // Calcul de la couleur de fond (Évolution du 1er au dernier)
+                    // On passe d'un vert très clair (success) à un rouge/blanc très clair (danger)
+                    // HSL: 120 (vert) -> 0 (rouge)
+                    if ($totalStudents > 1) {
+                        $hue = 120 - ($index * (120 / ($totalStudents - 1)));
+                        $rowBg = "hsla($hue, 70%, 95%, 0.8)";
+                    } else {
+                        $rowBg = "hsla(120, 70%, 95%, 0.8)";
+                    }
+
                     $rawDataJson = isset($student['raw_data']) ? htmlspecialchars(json_encode($student['raw_data']), ENT_QUOTES, 'UTF-8') : 'null';
                 ?>
-                <tr>
+                <tr style="background-color: <?php echo $rowBg; ?>;">
                     <td><span class="rank-badge <?php echo $badgeClass; ?>"><?php echo $student['rank_str']; ?></span></td>
-                    <td style="text-align: left; font-weight: 600;"><?php echo $student['nom']; ?></td>
-                    <td><?php echo $student['sexe'] == 'Fille' ? 'F' : 'M'; ?></td>
-                    <td style="font-weight: 700; color: var(--primary-color);"><?php echo number_format($student['moyenne'], 2, ',', ' '); ?></td>
+                    <td style="text-align: left; font-weight: 700; color: #334155;"><?php echo $student['nom']; ?></td>
+                    <td><span style="font-weight: 600; opacity: 0.7;"><?php echo $student['sexe'] == 'Fille' ? 'F' : 'M'; ?></span></td>
+                    <td style="font-weight: 800; color: var(--primary-color); font-size: 1.1rem;"><?php echo number_format($student['moyenne'], 2, ',', ' '); ?></td>
                     <td class="action-col no-print">
                         <?php if(isset($student['raw_data'])): ?>
                             <button class="btn-correct" onclick="editStudent('<?php echo $rawDataJson; ?>')">
                                 <i class="fas fa-pen"></i> Corriger
                             </button>
-                        <?php else: ?>
-                            <span style="font-size: 0.8rem; color: #94a3b8;">N/A (Ancien format)</span>
                         <?php endif; ?>
                     </td>
                 </tr>
