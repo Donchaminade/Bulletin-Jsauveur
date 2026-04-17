@@ -8,6 +8,139 @@
     <script src="bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            width: 100%;
+            color: black;
+            border-bottom: 2px solid #000;
+            padding-bottom: 15px;
+        }
+        .header-left, .header-right {
+            width: 38%;
+            text-align: center;
+        }
+        .header-center {
+            width: 24%;
+            text-align: center;
+        }
+        .school-info {
+            text-align: center;
+            line-height: 1.4;
+            font-size: 0.80rem;
+            margin-top: 10px;
+        }
+        .logo-bulletin {
+            width: 90px;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+        }
+        .ministry-info {
+            font-size: 0.65rem;
+            font-weight: bold;
+            text-align: center;
+            line-height: 1.3;
+        }
+        .republique-info {
+            font-size: 0.65rem;
+            text-align: center;
+            line-height: 1.3;
+        }
+        .checkboxes {
+            display: flex;
+            justify-content: flex-start;
+            gap: 40px;
+            margin-bottom: 15px;
+            font-size: 11px;
+        }
+        .checkboxes div {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        @media print {
+            @page {
+                size: A4 landscape;
+                margin: 5mm 8mm;
+            }
+            html {
+                zoom: 78%;
+            }
+            body::before {
+                display: none !important;
+            }
+            .container::before {
+                display: none !important;
+            }
+            body {
+                background: white !important;
+                background-image: none !important;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+                backdrop-filter: none !important;
+            }
+            .no-print {
+                display: none !important;
+            }
+            .container {
+                max-width: 100% !important;
+                width: 100% !important;
+                margin: 0 !important;
+                padding: 0 !important;
+                box-shadow: none !important;
+                page-break-after: avoid !important;
+                page-break-inside: avoid !important;
+            }
+            table {
+                width: 100% !important;
+                page-break-inside: avoid !important;
+            }
+            tr {
+                page-break-inside: avoid !important;
+            }
+        }
+        body.export-pdf::before {
+            display: none !important;
+        }
+        body.export-pdf .container::before {
+            display: none !important;
+        }
+        body.export-pdf {
+            background-color: white !important;
+            backdrop-filter: none !important;
+        }
+        
+    
+        /* CSS Table Scale */
+        body.export-pdf .container,
+        body.export-pdf {
+            max-width: 100% !important;
+            width: 100% !important;
+            margin: 0 !important;
+            padding: 0 !important;
+        }
+        table {
+            font-size: 9px !important;
+            width: 100% !important;
+            table-layout: fixed !important;
+        }
+        th, td {
+            padding: 3px 4px !important;
+            word-wrap: break-word !important;
+            overflow: hidden !important;
+        }
+        th:first-child, td:first-child {
+            width: 14% !important; /* Colonne matières plus large */
+        }
+        .header {
+            font-size: 12px;
+        }
+        
+    </style>
 
     <link rel="stylesheet" href="style.css">
     <style>
@@ -21,21 +154,17 @@
 
                 /* Container for the bulletin itself (printable) */
                 .container {
-                        max-width: 900px;
+                        max-width: 750px;
                         margin: 20px auto;
                         background-color: #ffffff;
-                        padding: 30px;
+                        padding: 15px;
                         box-shadow: 0 10px 25px rgba(0,0,0,0.1);
                         position: relative;
                         z-index: 2;
                         border-radius: 8px;
                 }
 
-                @media print {
-                    body { background-color: white; padding: 0; }
-                    .container { margin: 0; box-shadow: none; border-radius: 0; width: 100%; max-width: 100%; }
-                    .no-print { display: none !important; }
-                }
+                
 
                 .container::before {
                         content: "";
@@ -44,7 +173,7 @@
                         left: 0;
                         width: 100%;
                         height: 100%;
-                        background-image: url('CS1.png');
+                        /* background removed for PDF clarity */
                         background-repeat: no-repeat;
                         background-position: center;
                         background-size: 70%;
@@ -68,9 +197,45 @@
                 th { background-color: #f3f4f6; color: #1a1a1a; font-weight: bold; }
                 td { background-color: #fff; }
 
-        @media print {
-            .no-print { display: none !important; }
+        
+    
+        body.export-pdf::before {
+            display: none !important;
         }
+        body.export-pdf .container::before {
+            display: none !important;
+        }
+        body.export-pdf {
+            background-color: white !important;
+            backdrop-filter: none !important;
+        }
+        
+    
+        /* CSS Table Scale */
+        body.export-pdf .container,
+        body.export-pdf {
+            max-width: 100% !important;
+            width: 100% !important;
+            margin: 0 !important;
+            padding: 0 !important;
+        }
+        table {
+            font-size: 9px !important;
+            width: 100% !important;
+            table-layout: fixed !important;
+        }
+        th, td {
+            padding: 3px 4px !important;
+            word-wrap: break-word !important;
+            overflow: hidden !important;
+        }
+        th:first-child, td:first-child {
+            width: 14% !important; /* Colonne matières plus large */
+        }
+        .header {
+            font-size: 12px;
+        }
+        
     </style>
 </head>
 
@@ -84,9 +249,18 @@
                 <i class="fas fa-arrow-left"></i> Retour
             </a>
         </div>
-        <button onclick="downloadPDF()" class="nav-link" style="background: var(--primary-color); color: white; border: none; cursor: pointer; padding: 0.8rem 1.5rem; border-radius: 12px; font-weight: 600; display: flex; align-items: center; gap: 10px; transition: all 0.3s ease;">
-            <i class="fas fa-file-pdf"></i> Télécharger PDF
-        </button>
+
+        <div style="display: flex; gap: 10px;">
+            <?php if (isset($isComplete) && $isComplete): ?>
+            <a href="rangs.php?file=<?php echo urlencode(basename($filename)); ?>&classe=<?php echo urlencode($classe); ?>&trimestre=<?php echo urlencode($trimestre); ?>" class="nav-link" style="background: #fbbf24; color: #000; border: none; cursor: pointer; padding: 0.8rem 1.5rem; border-radius: 12px; font-weight: 600; display: flex; align-items: center; gap: 10px; transition: all 0.3s ease;">
+                <i class="fas fa-trophy"></i> Tableau des Rangs (<?php echo $countSaved; ?>/<?php echo $effectif; ?>)
+            </a>
+            <?php endif; ?>
+
+            <button onclick="downloadPDF()" class="nav-link" style="background: var(--primary-color); color: white; border: none; cursor: pointer; padding: 0.8rem 1.5rem; border-radius: 12px; font-weight: 600; display: flex; align-items: center; gap: 10px; transition: all 0.3s ease;">
+                <i class="fas fa-file-pdf"></i> Télécharger PDF
+            </button>
+        </div>
     </header>
 
     
@@ -232,6 +406,45 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     // Récupération sécurisée de la valeur du trimestre depuis le formulaire
     $trimestre = htmlspecialchars($_POST['trimestre']);
+    
+    // --- LOGIQUE DE CLASSEMENT (SAUVEGARDE) ---
+    $dataFolder = 'data';
+    if (!is_dir($dataFolder)) {
+        mkdir($dataFolder, 0777, true);
+    }
+    
+    // Nettoyage du nom de la classe pour le fichier (ex: 6ème -> 6eme)
+    $classeSafe = str_replace(['è', 'é', ' '], ['e', 'e', '_'], $classe);
+    $filename = $dataFolder . '/' . $classeSafe . '_' . $trimestre . '.json';
+    
+    $currentData = [];
+    if (file_exists($filename)) {
+        $currentData = json_decode(file_get_contents($filename), true);
+    }
+    
+    // Enregistrement de l'élève (mise à jour si déjà présent)
+    $newEntry = [
+        'nom' => $nomEleve,
+        'moyenne' => floor($resultat * 100) / 100,
+        'sexe' => $gender,
+        'time' => time()
+    ];
+    
+    $found = false;
+    foreach ($currentData as $key => $entry) {
+        if ($entry['nom'] === $nomEleve) {
+            $currentData[$key] = $newEntry;
+            $found = true;
+            break;
+        }
+    }
+    if (!$found) $currentData[] = $newEntry;
+    
+    file_put_contents($filename, json_encode($currentData));
+    $countSaved = count($currentData);
+    $isComplete = ($countSaved >= (int)$effectif);
+    // ------------------------------------------
+
     // Affichage en fonction du trimestre
     if ($trimestre == 1) {
         // echo ": " . $resultat;
@@ -250,19 +463,31 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
      <!-- Bouton de téléchargement -->
     
-      <div class="container" style="background-color: #ffffff;">
+      <div class="container">
         <div class="header">
-        <div class="header-left">
-        <strong>&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; MINISTÈRE DES ENSEIGNEMENTS <br>&nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PRIMAIRES SECONDAIRES,TECHNIQUES <br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ET DE L'ARTISANAT</strong><br>
-                <em>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;<b>Complexe Scolaire "LE TRESOR"</b></em><br>
-                <span>&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp; ADETIKOPE - ADOGLOVE</span><br>
-                <span>&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;Tel: 90 74 78 77 / 92 30 88 33</span><br>               
+            <div class="header-left">
+                <div class="ministry-info">
+                    MINISTÈRE DES ENSEIGNEMENTS <br>
+                    PRIMAIRES SECONDAIRES, TECHNIQUES <br>
+                    ET DE L'ARTISANAT
+                </div>
+                <div class="school-info">
+                    <em style="display: block;"><b>Complexe Scolaire "Jesus le Sauveur"</b></em>
+                    <span style="display: block;">ADETIKOPE - WELLCITY</span>
+                    <span style="display: block;">Tel: 92104575 / 72219650 / 98346209</span>
+                </div>
             </div>
-                <div class="header-right">
+            
+            <div class="header-center">
+                <img src="hd.png" alt="Logo" class="logo-bulletin">
+            </div>
+
+            <div class="header-right">
+                <div class="republique-info">
                     <strong>RÉPUBLIQUE TOGOLAISE</strong><br>
-                    <em>Travail - Liberté - Patrie </em><br>
-                    <img src="hd.png" alt="Logo" >
-                    </div>
+                    <em>Travail - Liberté - Patrie</em>
+                </div>
+            </div>
         </div>
 
         <table>
@@ -315,9 +540,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     
                     <td><?php echo number_format(floor(($moyenneFrancaise) * 100) / 100, 2, ',', ' '); ?></td>
                     <td><?php echo $noteCompFrancaise; ?></td>
-                    <td><?php echo number_format(floor((($moyenneFrancaise + $noteCompFrancaise) / 2) * 100) / 100, 2, ',', ' '); ?></td>
+                    <td><?php echo number_format(floor((floatval($moyenneFrancaise) + floatval($noteCompFrancaise)) / 2 * 100) / 100, 2, ',', ' '); ?></td>
                     <td>2</td>
-                    <td><?php echo number_format(floor((($noteCompFrancaise + $moyenneFrancaise)/2) * 2) * 100) / 100, 2, ',', ' ');?></td>
+                    <td><?php echo number_format(floor((floatval($noteCompFrancaise) + floatval($moyenneFrancaise)) / 2 * 2 * 100) / 100, 2, ',', ' '); ?></td>
                     <td><?php echo $observationFrancaise; ?></td>
                     <td><?php echo $profCompFrancaise; ?></td>
                     <td></td>
@@ -333,7 +558,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <td><?php echo $noteCompECM; ?></td>
                 <td><?php echo number_format(($moyenneECM + $noteCompECM) / 2, 2); ?></td>
                 <td>1</td>
-                <td><?php echo number_format((($noteCompECM + $moyenneECM)/2) * 1,2);?></td>
+                <td><?php echo number_format(floor((floatval($noteCompECM) + floatval($moyenneECM)) / 2 * 1 * 100) / 100, 2, ',', ' '); ?></td>
                 <td><?php echo $observationECM; ?></td>
                <td><?php echo $profCompECM; ?></td>
                 <td></td>
@@ -352,7 +577,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <td><?php echo $noteCompAnglais; ?></td>
                     <td><?php echo number_format(($moyenneAnglais + $noteCompAnglais) / 2, 2); ?></td>
                     <td>1</td>
-                    <td><?php echo number_format((($noteCompAnglais + $moyenneAnglais)/2) * 1,2);?></td>
+                    <td><?php echo number_format(floor((floatval($noteCompAnglais) + floatval($moyenneAnglais)) / 2 * 1 * 100) / 100, 2, ',', ' '); ?></td>
                     <td><?php echo $observationAnglais; ?></td>
                    <td><?php echo $profCompAnglais; ?></td>                   
                     <td></td>
@@ -370,7 +595,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <td><?php echo $noteCompHistoireGeo; ?></td>
                 <td><?php echo number_format(($moyenneHistoireGeo + $noteCompHistoireGeo) / 2, 2); ?></td>
                 <td>1</td>
-                <td><?php echo number_format((($noteCompHistoireGeo + $moyenneHistoireGeo)/2) * 1,2);?></td>
+                <td><?php echo number_format(floor((floatval($noteCompHistoireGeo) + floatval($moyenneHistoireGeo)) / 2 * 1 * 100) / 100, 2, ',', ' '); ?></td>
                 <td><?php echo $observationHistoireGeo; ?></td>
                <td><?php echo $profCompHistoireGeo; ?></td>
                 <td></td>
@@ -392,7 +617,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <td><?php echo $noteCompMath; ?></td>
                 <td><?php echo number_format(($moyenneMath + $noteCompMath) / 2, 2); ?></td>
                 <td>1</td>
-                <td><?php echo number_format ((($noteCompMath + $moyenneMath)/2)* 1,2);?></td>
+                <td><?php echo number_format(floor((floatval($noteCompMath) + floatval($moyenneMath)) / 2 * 1 * 100) / 100, 2, ',', ' '); ?></td>
                 <td><?php echo $observationMath; ?></td>
                 <td><?php echo $profCompMath; ?></td>
                 <td></td>
@@ -408,7 +633,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <td><?php echo $noteCompSVT; ?></td>
                 <td><?php echo number_format(($moyenneSVT + $noteCompSVT) / 2, 2); ?></td>
                 <td>1</td>
-                <td><?php echo number_format((($noteCompSVT + $moyenneSVT)/2)* 1,2);?></td>
+                <td><?php echo number_format(floor((floatval($noteCompSVT) + floatval($moyenneSVT)) / 2 * 1 * 100) / 100, 2, ',', ' '); ?></td>
                 <td><?php echo $observationSVT; ?></td>
                 <td><?php echo $profCompSVT; ?></td>
                 <td></td>
@@ -424,7 +649,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <td><?php echo $noteCompPhysique; ?></td>
                 <td><?php echo number_format(($moyennePhysique + $noteCompPhysique) / 2, 2); ?></td>
                 <td>1</td>
-                <td><?php echo number_format((($noteCompPhysique + $moyennePhysique)/2)* 1,2);?></td>
+                <td><?php echo number_format(floor((floatval($noteCompPhysique) + floatval($moyennePhysique)) / 2 * 1 * 100) / 100, 2, ',', ' '); ?></td>
                 <td><?php echo $observationPhysique; ?></td>
                <td><?php echo $profCompPhysique; ?></td>
                 <td></td>
@@ -504,7 +729,7 @@ echo number_format($sommeMoyennes, 2)
             <td>..................</td>
             <td>Moyenne du 1er trimestre:</td>
             <td>
-                <?php if ($trimestre == 1) echo number_format(floor(($resultat) * 100) / 100, 2, ',', ' '); ?>
+                <?php if ($trimestre == 1) echo number_format(floor(((float)$resultat) * 100) / 100, 2, ',', ' '); ?>
             </td>
             <td>Rang: ..............</td>
             <td>Moy. la plus forte: ...............</td>
@@ -515,7 +740,7 @@ echo number_format($sommeMoyennes, 2)
             <td>..................</td>
             <td>Moyenne du 2ème trimestre:</td>
             <td>
-                <?php if ($trimestre == 2) echo number_format(floor(($resultat) * 100) / 100, 2, ',', ' '); ?>
+                <?php if ($trimestre == 2) echo number_format(floor(((float)$resultat) * 100) / 100, 2, ',', ' '); ?>
             </td>
                 <td>Rang: ..............</td>
                 <td>Moy. la plus faible: ...............</td>
@@ -525,7 +750,7 @@ echo number_format($sommeMoyennes, 2)
             <td>..................</td>
             <td>Moyenne du 3ème trimestre:</td>
             <td>
-                <?php if ($trimestre == 3) echo number_format(floor(($resultat) * 100) / 100, 2, ',', ' '); ?>
+                <?php if ($trimestre == 3) echo number_format(floor(((float)$resultat) * 100) / 100, 2, ',', ' '); ?>
             </td>
             <td>Rang: ..............</td>
             <td>Moy. Generale: ...............</td>
@@ -575,34 +800,13 @@ echo number_format($sommeMoyennes, 2)
  
  <script>
    function downloadPDF() {
-    const element = document.body; // Utilise le corps de la page comme contenu à convertir en PDF
-    const buttons = document.querySelectorAll(".no-print"); // Sélectionne tous les éléments avec la classe no-print
-
-    // Masquez les boutons avant de générer le PDF
-    buttons.forEach((button) => {
-        button.style.display = "none";
-    });
-
-    const options = {
-        margin: 0,
-        filename: 'bulletin_notes.pdf',
-        image: { type: 'jpeg', quality: 0.98 },
-        html2canvas: { scale: 2 },
-        jsPDF: { unit: 'cm', format: 'a4', orientation: 'portrait' }
-    };
-
-    html2pdf()
-        .set(options)
-        .from(element)
-        .save()
-        .then(() => {
-            // Réaffichez les boutons après la génération du PDF
-            buttons.forEach((button) => {
-                button.style.display = "inline-block";
-            });
-        });
-}
-
+        var nomEleve = '<?php echo isset($nomEleve) ? $nomEleve : "bulletin"; ?>';
+        var classe = '<?php echo isset($classe) ? $classe : ""; ?>';
+        var originalTitle = document.title;
+        document.title = 'Bulletin_' + nomEleve.replace(/\s+/g, '_') + '_' + classe.replace(/\s+/g, '_');
+        window.print();
+        setTimeout(function() { document.title = originalTitle; }, 100);
+    }
 </script>
     
     
