@@ -40,3 +40,39 @@ document.addEventListener('keydown', function (e) {
         }
     }
 });
+
+// --- PONT JS POUR LE MODE CORRECTION ---
+document.addEventListener('DOMContentLoaded', function () {
+    const correctionDataStr = localStorage.getItem('correctionData');
+    if (correctionDataStr) {
+        try {
+            const rawData = JSON.parse(correctionDataStr);
+            
+            for (const key in rawData) {
+                if (rawData.hasOwnProperty(key)) {
+                    const value = rawData[key];
+                    
+                    if (key === 'gender') {
+                        const radio = document.querySelector(`input[name="gender"][value="${value}"]`);
+                        if (radio) radio.checked = true;
+                    } else {
+                        const el = document.getElementById(key) || document.querySelector(`input[name="${key}"]`);
+                        if (el && el.type !== 'radio' && el.type !== 'checkbox') {
+                            el.value = value;
+                        }
+                    }
+                }
+            }
+            
+            localStorage.removeItem('correctionData');
+            
+            let header = document.querySelector('h1');
+            if (header) {
+                header.innerHTML += ' <span style="background: #ef4444; color: white; padding: 2px 8px; border-radius: 8px; font-size: 0.8rem; vertical-align: middle; margin-left: 10px;">Mode Correction</span>';
+            }
+            
+        } catch (e) {
+            console.error("Erreur lors de l'injection des données de correction:", e);
+        }
+    }
+});

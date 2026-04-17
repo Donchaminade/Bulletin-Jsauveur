@@ -456,7 +456,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         'nom' => $nomEleve,
         'moyenne' => floor($resultat * 100) / 100,
         'sexe' => $gender,
-        'time' => time()
+        'time' => time(),
+        'raw_data' => $_POST
     ];
     
     $found = false;
@@ -873,9 +874,9 @@ echo number_format($sommeMoyennes, 2)
         var nomEleve = '<?php echo isset($nomEleve) ? $nomEleve : "bulletin"; ?>';
         var classe = '<?php echo isset($classe) ? $classe : ""; ?>';
         var originalTitle = document.title;
-        document.title = 'Bulletin_' + nomEleve.replace(/\s+/g, '_') + '_' + classe.replace(/\s+/g, '_');
+        document.title = nomEleve.replace(/\s+/g, '').toLowerCase() + '.pdf';
         window.print();
-        setTimeout(function() { document.title = originalTitle; }, 100);
+        setTimeout(function() { document.title = nomEleve.replace(/\s+/g, '').toLowerCase() + '.pdf'; }, 100);
     }
 </script>
     
