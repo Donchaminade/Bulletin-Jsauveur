@@ -63,13 +63,14 @@
             gap: 8px;
         }
         @media print {
+            * {
+                overflow: visible !important;
+            }
             @page {
-                size: A4 landscape;
+                size: A4 portrait;
                 margin: 5mm 8mm;
             }
-            html {
-                zoom: 78%;
-            }
+            
             body::before {
                 display: none !important;
             }
@@ -77,7 +78,7 @@
                 display: none !important;
             }
             body {
-                background: white !important;
+                background: #fff0f5 !important;
                 background-image: none !important;
                 -webkit-print-color-adjust: exact;
                 print-color-adjust: exact;
@@ -87,6 +88,7 @@
                 display: none !important;
             }
             .container {
+                background-color: #fff0f5 !important;
                 max-width: 100% !important;
                 width: 100% !important;
                 margin: 0 !important;
@@ -118,18 +120,18 @@
         /* CSS Table Scale */
         body.export-pdf .container,
         body.export-pdf {
-            max-width: 100% !important;
             width: 100% !important;
             margin: 0 !important;
             padding: 0 !important;
         }
         table {
-            font-size: 9px !important;
+            font-size: 10px !important;
             width: 100% !important;
-            table-layout: fixed !important;
+            max-width: 100% !important;
+            border-collapse: collapse;
         }
         th, td {
-            padding: 3px 4px !important;
+            padding: 4px 3px !important;
             word-wrap: break-word !important;
             overflow: hidden !important;
         }
@@ -156,9 +158,9 @@
 
                 /* Container for the bulletin itself (printable) */
                 .container {
-                        max-width: 750px;
+                        max-width: 850px;
                         margin: 20px auto;
-                        background-color: #ffffff;
+                        background-color: #fff0f5;
                         padding: 15px;
                         box-shadow: 0 10px 25px rgba(0,0,0,0.1);
                         position: relative;
@@ -216,18 +218,18 @@
         /* CSS Table Scale */
         body.export-pdf .container,
         body.export-pdf {
-            max-width: 100% !important;
             width: 100% !important;
             margin: 0 !important;
             padding: 0 !important;
         }
         table {
-            font-size: 9px !important;
+            font-size: 10px !important;
             width: 100% !important;
-            table-layout: fixed !important;
+            max-width: 100% !important;
+            border-collapse: collapse;
         }
         th, td {
-            padding: 3px 4px !important;
+            padding: 4px 3px !important;
             word-wrap: break-word !important;
             overflow: hidden !important;
         }
