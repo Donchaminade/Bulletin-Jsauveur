@@ -370,7 +370,7 @@ p.description { color: #64748b; font-size: 1.1rem; margin-bottom: 2.5rem; line-h
     box-shadow: 0 15px 30px rgba(37, 99, 235, 0.3);
     filter: brightness(1.1);
 }
-}
+
 
 .table-premium th {
     background: #f3f4f6;
@@ -450,5 +450,89 @@ footer {
 
     .nav-link span {
         display: none;
+    }
+}
+
+/* ============================= */
+/* Bulletin Preview (screen only) */
+/* ============================= */
+.bulletin-preview-wrapper {
+    max-width: 960px;
+    margin: 90px auto 40px;
+    padding: 1.5rem;
+}
+
+.bulletin-page {
+    background: #ffffff;
+    border-radius: 20px;
+    padding: 2.5rem;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
+    border: 1px solid #f1f5f9;
+    position: relative;
+    overflow: hidden;
+}
+
+.bulletin-page::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 5px;
+    background: var(--primary-gradient);
+    border-radius: 20px 20px 0 0;
+}
+
+.bulletin-page table {
+    font-size: 11px;
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.bulletin-page th, .bulletin-page td {
+    padding: 5px 6px;
+    word-wrap: break-word;
+}
+
+.bulletin-page th {
+    background: #f8fafc;
+    font-weight: 700;
+    text-align: center;
+    border: 1px solid #e2e8f0;
+}
+
+.bulletin-page td {
+    border: 1px solid #e2e8f0;
+}
+
+/* ========================= */
+/* Impression Bulletin (print) */
+/* ========================= */
+@media print {
+    .premium-header,
+    .no-print { display: none !important; }
+
+    .bulletin-preview-wrapper {
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+    .bulletin-page {
+        box-shadow: none !important;
+        border: none !important;
+        border-radius: 0 !important;
+        padding: 0 !important;
+        background: #fff0f5 !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+
+    .bulletin-page::before {
+        display: none !important;
+    }
+
+    body { background: #fff0f5 !important; }
+
+    @page {
+        size: A4 portrait;
+        margin: 5mm 8mm;
     }
 }

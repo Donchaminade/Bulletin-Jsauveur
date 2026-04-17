@@ -8,6 +8,7 @@
     <script src="bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
     <style>
         .header {
             display: flex;
@@ -770,10 +771,28 @@ echo number_format($sommeMoyennes, 2)
    function downloadPDF() {
         var nomEleve = '<?php echo isset($nomEleve) ? $nomEleve : "bulletin"; ?>';
         var classe = '<?php echo isset($classe) ? $classe : ""; ?>';
-        var originalTitle = document.title;
-        document.title = nomEleve.replace(/\s+/g, '').toLowerCase() + '.pdf';
-        window.print();
-        setTimeout(function() { document.title = nomEleve.replace(/\s+/g, '').toLowerCase() + '.pdf'; }, 100);
+        var filename = (nomEleve.replace(/\s+/g, '_') + '_' + classe.replace(/\s+/g, '_') + '.pdf').toLowerCase();
+
+        var element = document.querySelector('.container');
+        if (!element) {
+            alert('Erreur : contenu du bulletin introuvable.');
+            return;
+        }
+
+        var btn = document.querySelector('button[onclick="downloadPDF()"]');
+        if (btn) { btn.disabled = true; btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Génération...'; }
+
+        var opt = {
+            margin:       [5, 8, 5, 8],
+            filename:     filename,
+            image:        { type: 'jpeg', quality: 0.98 },
+            html2canvas:  { scale: 2, useCORS: true, logging: false },
+            jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
+        };
+
+        html2pdf().set(opt).from(element).save().then(function() {
+            if (btn) { btn.disabled = false; btn.innerHTML = '<i class="fas fa-file-pdf"></i> Télécharger PDF'; }
+        });
     }
 </script>
     
