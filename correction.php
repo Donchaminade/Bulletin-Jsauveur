@@ -45,63 +45,125 @@ foreach ($files as $file) {
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; color: #1e293b; }
-        .hero { text-align: center; padding: 3rem 1rem 1rem; }
-        .hero h1 { font-size: 2.5rem; color: var(--primary-color); margin-bottom: 0.5rem; }
-        .hero p { color: #64748b; font-size: 1.1rem; }
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background-color: #f8fafc; 
+            color: #1e293b; 
+            background: radial-gradient(circle at top right, #f1f5f9, #ffffff);
+            min-height: 100vh;
+        }
+        .hero { text-align: center; padding: 4rem 1rem 2rem; }
+        .hero h1 { 
+            font-size: 3rem; 
+            color: var(--primary-color); 
+            margin-bottom: 0.5rem; 
+            font-weight: 800;
+            letter-spacing: -0.025em;
+        }
+        .hero p { color: #64748b; font-size: 1.25rem; }
         
-        .main-container { max-width: 900px; margin: 0 auto; padding: 2rem; }
+        .main-container { max-width: 1000px; margin: 0 auto; padding: 2rem; }
         
         .glass-panel {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border-radius: 16px;
-            padding: 2rem;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(12px);
+            border-radius: 24px;
+            padding: 3rem;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.4);
             margin-bottom: 2rem;
+            position: relative;
+            overflow: hidden;
         }
 
-        .form-group { margin-bottom: 1.5rem; }
-        .form-label { display: block; font-weight: 600; margin-bottom: 0.5rem; color: #475569; }
+        .glass-panel::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 6px;
+            background: linear-gradient(90deg, var(--primary-color), #6366f1);
+        }
+
+        .form-group { margin-bottom: 2rem; }
+        .form-label { 
+            display: block; 
+            font-weight: 700; 
+            margin-bottom: 1rem; 
+            color: #334155; 
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
         
+        #fileSelector {
+            height: 60px;
+            font-size: 1.1rem;
+            border-radius: 14px;
+            padding: 0 1.5rem;
+            border: 2px solid #e2e8f0;
+            background-color: #f8fafc;
+            transition: all 0.3s ease;
+        }
+
+        #fileSelector:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
+            background-color: white;
+        }
+
         .student-list {
-            margin-top: 2rem;
+            margin-top: 3rem;
             display: none;
+            animation: slideUp 0.4s ease-out;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
         
         .student-card {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 1rem 1.5rem;
-            background: #f1f5f9;
-            border-radius: 12px;
-            margin-bottom: 0.8rem;
-            transition: all 0.2s ease;
+            padding: 1.5rem 2rem;
+            background: white;
+            border-radius: 16px;
+            margin-bottom: 1rem;
+            transition: all 0.3s ease;
+            border: 1px solid #f1f5f9;
         }
         .student-card:hover {
-            transform: translateY(-2px);
-            background: white;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-            border: 1px solid var(--primary-color);
+            transform: scale(1.02);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+            border-color: var(--primary-color);
         }
-        .student-info h3 { margin: 0; color: #1e293b; font-size: 1.1rem; }
-        .student-info p { margin: 0; color: #64748b; font-size: 0.9rem; }
+        .student-info h3 { 
+            margin: 0; 
+            color: #0f172a; 
+            font-size: 1.25rem; 
+            font-weight: 700;
+        }
+        .student-info p { margin: 0.25rem 0 0; color: #64748b; font-size: 1rem; }
         
         .btn-action {
-            background: white;
-            color: var(--primary-color);
-            border: 1px solid var(--primary-color);
-            padding: 0.5rem 1.2rem;
-            border-radius: 8px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-        .btn-action:hover {
             background: var(--primary-color);
             color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 10px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .btn-action:hover {
+            background: #1d4ed8;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(37, 99, 235, 0.3);
         }
         
     </style>
